@@ -1,25 +1,49 @@
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 from Perceptron import Perceptron
 
-ITER_NUM = 5
-SPECIES = {'Iris-setosa': 0, 'Iris-versicolor': 1, 'Iris-virginica': 2}
+# crucial parameters
 
-print("Running tests...")
+ITERS_NUM = 10
+LEARNING_RATE = 0.7
+SPECIES = {'Iris-setosa': 1.0, 'Iris-versicolor': -1.0}
 
-print("Downloading iris data...")
-data = pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data', header=None)
+# load data and throw away Iris-virginica
 
-neurons = [Perceptron(0.5, 4)] * 3
+data = pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data', header=None).values
+data = data[:-50]
 
-for neuron in neurons:
-    print(str(neuron))
+# plot sepal and petal length data
 
-for sample in data.values:
-    for neuron_num, neuron in enumerate(neurons):
-        if neuron_num == SPECIES[sample[-1]]:
-            neuron.learn(sample[:-1], 1)
-        else:
-            neuron.learn(sample[:-1], 0)
+plt.scatter(data[:50, 0], data[:50, 1], color='red', marker='o', label='Setosa')
+plt.scatter(data[51:, 0], data[51:, 1], color='blue', marker='o', label='Versicolor')
+plt.xlabel('Sepal length [cm]')
+plt.ylabel('Petal length [cm]')
+plt.legend(loc='upper left')
+plt.show()
 
-for neuron in neurons:
-    print(str(neuron))
+# shuffle data and extract targets
+
+np.random.shuffle(data)
+samples = []
+targets = []
+for row in data:
+    samples.append(row[:-1])
+    targets.append(SPECIES[row[-1]])
+samples = np.array(samples)
+targets = np.array(targets)
+
+# construct and learn perceptron
+
+perceptron = Perceptron(4, 1, iters_num=ITERS_NUM)
+errors = perceptron.learn(samples, targets)
+
+# plot learning curve
+
+plt.scatter(range(0, ITERS_NUM), errors, color='black', marker='o', label='Errors')
+plt.xlabel('Iteration')
+plt.ylabel('Errors')
+plt.show()
+
+print(str(perceptron))
