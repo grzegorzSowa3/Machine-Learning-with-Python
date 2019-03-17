@@ -26,7 +26,7 @@ for row in data:
 samples = np.array(samples)
 targets = np.array(targets)
 
-# construct and learn perceptron
+# construct and learn neuron
 
 network = Adaline(4, learning_rate=LEARNING_RATE, epochs_num=EPOCHS_NUM, batch_size=BATCH_SIZE)
 errors = network.learn(samples, targets)

@@ -37,7 +37,9 @@ targets = np.array(targets)
 # construct and learn perceptron
 
 perceptron = Perceptron(4, 1, iters_num=ITERS_NUM)
+print(str(perceptron))
 errors = perceptron.learn(samples, targets)
+print(str(perceptron))
 
 # plot learning curve
 

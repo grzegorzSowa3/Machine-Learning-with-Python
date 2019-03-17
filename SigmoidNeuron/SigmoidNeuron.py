@@ -37,6 +37,7 @@ class SigmoidNeuron:
     def batch_learn(self, samples, targets):
         net_inputs = self.__net_input(samples)
         errors = targets - self.__sigmoid(net_inputs)
+        print(np.shape(samples.T.dot(errors * self.__sigmoid(net_inputs, derivative=True))))
         weights_delta = self.learning_rate * samples.T.dot(errors * self.__sigmoid(net_inputs, derivative=True))
         # print(np.shape(samples.T.dot(errors)))
         bias_delta = self.learning_rate * np.sum(errors * self.__sigmoid(net_inputs, derivative=True))
