@@ -19,26 +19,31 @@ print("data loaded")
 # shuffle data and extract targets
 
 np.random.shuffle(data)
-samples = []
-targets = []
-for row in data:
-    samples.append(row[:-1].reshape((-1, 1)) / 4)
-    targets.append(np.array(SPECIES[row[-1]]).reshape((-1, 1)))
-samples = np.array(samples, dtype=np.float32)
-targets = np.array(targets, dtype=np.float32)
+learning_samples = []
+learning_targets = []
+test_samples = []
+test_targets = []
+for row in data[:-50]:
+    learning_samples.append(row[:-1].reshape((-1, 1)) / 10)
+    learning_targets.append(np.array(SPECIES[row[-1]]).reshape((-1, 1)))
+learning_samples = np.array(learning_samples, dtype=np.float32)
+learning_targets = np.array(learning_targets, dtype=np.float32)
+for row in data[-50:]:
+    test_samples.append(row[:-1].reshape((-1, 1)) / 10)
+    test_targets.append(np.array(SPECIES[row[-1]]).reshape((-1, 1)))
+test_samples = np.array(test_samples, dtype=np.float32)
+test_targets = np.array(test_targets, dtype=np.float32)
 
 # construct and learn neuron
 
-network = FeedforwardNetwork(4, [3], learning_rate=LEARNING_RATE, beta=BETA)
-
-# print(network.calculate_net_inputs(samples[0]))
-errors = network.learn(samples, targets, epochs_num=EPOCHS_NUM, batch_size=BATCH_SIZE)
-# print(errors)
-success_rate = network.test(samples, targets)
-print(f"Success rate: {success_rate}")
+network = FeedforwardNetwork(4, [8, 3], learning_rate=LEARNING_RATE, beta=BETA)
+success_rates = []
+for i in range(1, EPOCHS_NUM):
+    network.learn(learning_samples, learning_targets, epochs_num=1, batch_size=BATCH_SIZE)
+    success_rates.append(network.test(learning_samples, learning_targets))
 
 # plot learning curve
-plt.scatter(range(1, len(errors) + 1), errors, color='black', marker='o', label='Errors')
-plt.xlabel('Try')
-plt.ylabel('Mean Squared Error')
+plt.scatter(range(1, len(success_rates) + 1), success_rates, color='black', marker='o', label='Errors')
+plt.xlabel('Test')
+plt.ylabel('Success rate')
 plt.show()
