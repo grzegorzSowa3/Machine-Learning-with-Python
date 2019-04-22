@@ -1,27 +1,25 @@
 import numpy as np
-import ActivationFunctions as af
 
 
 class FeedforwardNetwork:
 
     # Multi-layer neural network consisting of sigmoid neurons
 
-    def __init__(self, features_num, classes_num, hidden_layer_sizes, learning_rate=0.5):
+    def __init__(self, features_num, layer_sizes, activation_functions, learning_rate=0.5):
         # weights for first layer
-        self.layer_weights = [np.random.rand(hidden_layer_sizes[0], features_num) * 0.01]
+        self.layer_weights = [np.random.rand(layer_sizes[0], features_num) * 0.01]
         # weights for further layers
-        for i in range(1, len(hidden_layer_sizes)):
-            self.layer_weights.append(np.random.rand(hidden_layer_sizes[i], hidden_layer_sizes[i - 1]) * 0.01)
-        # weights for last layer
-        self.layer_weights.append(np.random.rand(classes_num, hidden_layer_sizes[-1]) * 0.01)
+        for i in range(1, len(layer_sizes)):
+            self.layer_weights.append(np.random.rand(layer_sizes[i], layer_sizes[i - 1]) * 0.01)
         # biases for all layers
         self.layer_biases = []
-        for layer_size in hidden_layer_sizes:
+        for layer_size in layer_sizes:
             self.layer_biases.append(np.zeros((layer_size, 1)))
-        # biases for last layer
-        self.layer_biases.append(np.zeros((classes_num, 1)))
         # hiperparameters
         self.features_num = features_num
+        self.layers_num = len(layer_sizes)
+        self.layer_sizes = layer_sizes
+        self.activation_functions = activation_functions
         self.learning_rate = learning_rate
 
     def learn(self, samples, targets, epochs_num=5, batch_size=15):
@@ -45,9 +43,9 @@ class FeedforwardNetwork:
         d_net_inputs = [activations[-1] - targets]
         d_biases = [np.sum(d_net_inputs[-1], axis=1, keepdims=True) / m]
         d_weights = [np.dot(d_net_inputs[-1], activations[-2].T) / m]
-        for i in range(1, len(self.layer_weights)):
-            d_net_inputs.insert(0, self.layer_weights[-i].T.dot(d_net_inputs[-i]) * af.sigmoid(net_inputs[-i - 1],
-                                                                                               derriv=True))
+        for i in range(1, self.layers_num):
+            d_net_inputs.insert(0, self.layer_weights[-i].T.dot(d_net_inputs[-i])
+                                * self.activation_functions[-i - 1](net_inputs[-i - 1], derivative=True))
             d_weights.insert(0, np.dot(d_net_inputs[0], activations[-i - 2].T) / m)
             d_biases.insert(0, np.sum(d_net_inputs[0], axis=1, keepdims=True) / m)
         for i in range(0, len(self.layer_weights)):
@@ -57,16 +55,16 @@ class FeedforwardNetwork:
 
     def __propagate_forward(self, samples):
         net_inputs = [self.layer_weights[0].dot(samples) + self.layer_biases[0]]
-        activations = [af.sigmoid(net_inputs[0])]
+        activations = [self.activation_functions[0](net_inputs[0])]
         for i in range(1, len(self.layer_weights)):
             net_inputs.append(self.layer_weights[i].dot(activations[-1]) + self.layer_biases[i])
-            activations.append(af.sigmoid(net_inputs[-1]))
+            activations.append(self.activation_functions[i](net_inputs[i]))
         return net_inputs, activations
 
     def predict(self, sample):
-        activations = af.sigmoid(self.layer_weights[0].dot(sample) + self.layer_biases[0])
+        activations = self.activation_functions[0](self.layer_weights[0].dot(sample) + self.layer_biases[0])
         for i in range(1, len(self.layer_weights)):
-            activations = af.sigmoid(self.layer_weights[i].dot(activations) + self.layer_biases[i])
+            activations = self.activation_functions[i](self.layer_weights[i].dot(activations) + self.layer_biases[i])
         return activations
 
     def test(self, samples, targets):

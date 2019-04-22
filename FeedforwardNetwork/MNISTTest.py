@@ -1,13 +1,15 @@
 from mlxtend.data import loadlocal_mnist
 import numpy as np
 import matplotlib.pyplot as plt
+from ActivationFunctions import *
 
 from FeedforwardNetwork import FeedforwardNetwork
 
-EPOCHS_NUM = 100
+EPOCHS_NUM = 10
 LEARNING_RATE = 0.01
 BATCH_SIZE = 100
-SHAPE = [300]
+SHAPE = [300, 10]
+ACTIVATION_FUNCTIONS = [tanh, sigmoid]
 OUTPUT_DICT = {
     0: [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     1: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -43,7 +45,7 @@ test_labels = np.array(test_labels, dtype=np.float32)
 print("Test data prepared.")
 
 print(f"Training neural network, on {EPOCHS_NUM} epochs...")
-network = FeedforwardNetwork(784, 10, SHAPE, learning_rate=LEARNING_RATE)
+network = FeedforwardNetwork(784, SHAPE, ACTIVATION_FUNCTIONS, learning_rate=LEARNING_RATE)
 errors = network.learn(train_samples, train_labels, epochs_num=EPOCHS_NUM, batch_size=BATCH_SIZE)
 print("Training completed.")
 
