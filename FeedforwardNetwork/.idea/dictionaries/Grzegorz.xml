@@ -4,6 +4,8 @@
       <w>feedforward</w>
       <w>hiperparameters</w>
       <w>setosa</w>
+      <w>softmax</w>
+      <w>tanh</w>
       <w>versicolor</w>
       <w>virginica</w>
     </words>

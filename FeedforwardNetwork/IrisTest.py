@@ -6,11 +6,12 @@ from FeedforwardNetwork import FeedforwardNetwork
 
 # crucial parameters
 
-EPOCHS_NUM = 1000
+EPOCHS_NUM = 500
 LEARNING_RATE = 0.3
 BATCH_SIZE = 10
 SHAPE = [4, 4, 3]
-ACTIVATION_FUNCTIONS = [tanh, tanh, sigmoid]
+ACTIVATION_FUNCTIONS = [tanh, tanh, softmax]
+L2_REGULARIZATION_FACTOR = 0.01
 SPECIES = {'Iris-setosa': [1, 0, 0], 'Iris-versicolor': [0, 1, 0], 'Iris-virginica': [0, 0, 1]}
 
 # load data
@@ -33,7 +34,8 @@ test_targets = np.array(test_targets, dtype=np.float32)
 
 # construct and learn neuron
 
-network = FeedforwardNetwork(4, SHAPE, ACTIVATION_FUNCTIONS, learning_rate=LEARNING_RATE)
+network = FeedforwardNetwork(4, SHAPE, ACTIVATION_FUNCTIONS, learning_rate=LEARNING_RATE,
+                             regularization_factor=L2_REGULARIZATION_FACTOR)
 
 errors = network.learn(learn_samples, learn_targets, epochs_num=EPOCHS_NUM, batch_size=BATCH_SIZE)
 success_rate = network.test(learn_samples, learn_targets)

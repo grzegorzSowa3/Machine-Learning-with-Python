@@ -5,12 +5,14 @@ class FeedforwardNetwork:
 
     # Multi-layer neural network consisting of sigmoid neurons
 
-    def __init__(self, features_num, layer_sizes, activation_functions, learning_rate=0.5):
+    def __init__(self, features_num, layer_sizes, activation_functions,
+                 learning_rate=0.5,
+                 regularization_factor=0.):
         # weights for first layer
-        self.layer_weights = [np.random.rand(layer_sizes[0], features_num) * 0.01]
+        self.layer_weights = [np.random.rand(layer_sizes[0], features_num) * 0.1]
         # weights for further layers
         for i in range(1, len(layer_sizes)):
-            self.layer_weights.append(np.random.rand(layer_sizes[i], layer_sizes[i - 1]) * 0.01)
+            self.layer_weights.append(np.random.rand(layer_sizes[i], layer_sizes[i - 1]) * 0.1)
         # biases for all layers
         self.layer_biases = []
         for layer_size in layer_sizes:
@@ -21,6 +23,7 @@ class FeedforwardNetwork:
         self.layer_sizes = layer_sizes
         self.activation_functions = activation_functions
         self.learning_rate = learning_rate
+        self.regularization_factor = regularization_factor
 
     def learn(self, samples, targets, epochs_num=5, batch_size=15):
         errors_history = []
@@ -42,16 +45,26 @@ class FeedforwardNetwork:
         activations.insert(0, samples)
         d_net_inputs = [activations[-1] - targets]
         d_biases = [np.sum(d_net_inputs[-1], axis=1, keepdims=True) / m]
-        d_weights = [np.dot(d_net_inputs[-1], activations[-2].T) / m]
+        d_weights = [np.dot(d_net_inputs[-1], activations[-2].T) / m
+                     + self.regularization_factor / m * self.layer_weights[-1]]
         for i in range(1, self.layers_num):
             d_net_inputs.insert(0, self.layer_weights[-i].T.dot(d_net_inputs[-i])
                                 * self.activation_functions[-i - 1](net_inputs[-i - 1], derivative=True))
-            d_weights.insert(0, np.dot(d_net_inputs[0], activations[-i - 2].T) / m)
+            d_weights.insert(0, np.dot(d_net_inputs[0], activations[-i - 2].T) / m
+                             + self.regularization_factor / m * self.layer_weights[-i - 1])
             d_biases.insert(0, np.sum(d_net_inputs[0], axis=1, keepdims=True) / m)
-        for i in range(0, len(self.layer_weights)):
+        for i in range(0, self.layers_num):
             self.layer_weights[i] -= self.learning_rate * d_weights[i]
             self.layer_biases[i] -= self.learning_rate * d_biases[i]
-        return np.sum(d_net_inputs[-1] ** 2 / m)
+        # print("targets * np.log(activations[-1])")
+        # print(targets)
+        # print(np.log(activations[-1]))
+        # print(np.multiply(targets, np.log(activations[-1])))
+        # print()
+        return - np.sum(targets * np.log(activations[-1])
+                        + (1 - targets) * np.log(np.ones(shape=np.shape(targets)) - activations[-1])) / m \
+               + self.regularization_factor / (2 * m) \
+               * np.sum([np.linalg.norm(weights, ord='fro') ** 2 for weights in self.layer_weights])
 
     def __propagate_forward(self, samples):
         net_inputs = [self.layer_weights[0].dot(samples) + self.layer_biases[0]]

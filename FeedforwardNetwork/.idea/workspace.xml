@@ -12,10 +12,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/IrisTest.py">
+        <entry file="file://$PROJECT_DIR$/FeedforwardNetwork.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="46">
-              <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+            <state relative-caret-position="207">
+              <caret line="9" column="43" lean-forward="true" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -48,9 +48,9 @@
         <option value="$PROJECT_DIR$/Test.py" />
         <option value="$PROJECT_DIR$/Test2.py" />
         <option value="$PROJECT_DIR$/ActivationFunctions.py" />
-        <option value="$PROJECT_DIR$/FeedforwardNetwork.py" />
-        <option value="$PROJECT_DIR$/IrisTest.py" />
         <option value="$PROJECT_DIR$/MNISTTest.py" />
+        <option value="$PROJECT_DIR$/IrisTest.py" />
+        <option value="$PROJECT_DIR$/FeedforwardNetwork.py" />
       </list>
     </option>
   </component>
@@ -84,7 +84,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554892288781" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555968203559" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -209,7 +209,7 @@
       <window_info anchor="bottom" id="Version Control" order="1" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Database Changes" order="3" />
-      <window_info anchor="bottom" id="Terminal" order="4" />
+      <window_info anchor="bottom" id="Terminal" order="4" weight="0.3296" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5005513" side_tool="true" weight="0.32923368" />
       <window_info anchor="bottom" x="224" y="304" width="855" height="159" id="Run" maximized="true" order="6" sideWeight="0.49944875" type="WINDOWED" weight="0.32923368" />
       <window_info anchor="bottom" x="1920" y="213" width="1302" height="348" id="Debug" maximized="true" order="7" type="WINDOWED" weight="0.32923368" />
@@ -225,6 +225,34 @@
       <window_info active="true" anchor="right" x="0" y="23" width="1858" height="1177" id="SciView" maximized="true" order="7" sideWeight="0.49788433" type="WINDOWED" visible="true" weight="0.17530319" />
       <window_info anchor="right" id="Maven" order="8" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2547619" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="1" />
+      <window_info anchor="bottom" id="TODO" order="2" />
+      <window_info anchor="bottom" id="Database Changes" order="3" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="4" visible="true" weight="0.3296" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5005513" side_tool="true" weight="0.32923368" />
+      <window_info anchor="bottom" x="224" y="304" width="855" height="159" id="Run" maximized="true" order="6" sideWeight="0.49944875" type="WINDOWED" weight="0.32923368" />
+      <window_info anchor="bottom" x="1920" y="213" width="1302" height="348" id="Debug" maximized="true" order="7" type="WINDOWED" weight="0.32923368" />
+      <window_info anchor="bottom" id="Find" order="8" weight="0.32923368" />
+      <window_info anchor="bottom" id="SonarLint" order="9" />
+      <window_info anchor="right" id="Palette" order="0" />
+      <window_info anchor="right" id="Ant Build" order="1" />
+      <window_info anchor="right" id="Theme Preview" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="right" x="0" y="0" width="418" height="1016" id="Documentation" order="4" sideWeight="0.50211567" side_tool="true" visible="true" weight="0.21775083" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info active="true" anchor="right" x="0" y="23" width="1858" height="1177" id="SciView" maximized="true" order="7" sideWeight="0.49788433" type="WINDOWED" visible="true" weight="0.17530319" />
+      <window_info anchor="right" id="Maven" order="8" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -239,22 +267,22 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/IrisTest.py</url>
-          <line>28</line>
+          <line>29</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/MNISTTest.py</url>
-          <line>37</line>
+          <line>38</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/MNISTTest.py</url>
-          <line>49</line>
+          <line>51</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/IrisTest.py</url>
-          <line>35</line>
+          <line>36</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
@@ -315,32 +343,35 @@
     <entry file="file://$APPLICATION_PLUGINS_DIR$/python/helpers/pydev/pydevd.py" />
     <entry file="file://$PROJECT_DIR$/ActivationFunctions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
+        <state relative-caret-position="23">
           <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FeedforwardNetwork.py">
+    <entry file="file://$PROJECT_DIR$/IrisTest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="696">
-          <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+        <state relative-caret-position="207">
+          <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MNISTTest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
+        <state relative-caret-position="483">
+          <caret line="48" column="21" lean-forward="true" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IrisTest.py">
+    <entry file="file://$PROJECT_DIR$/FeedforwardNetwork.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+        <state relative-caret-position="207">
+          <caret line="9" column="43" lean-forward="true" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
         </state>
       </provider>
     </entry>

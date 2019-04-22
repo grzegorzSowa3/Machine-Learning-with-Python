@@ -28,3 +28,10 @@ def leaky_relu(x, derivative=False):
         return np.max(0.01 * x, x)
     else:
         return np.where(x >= 0, 1, 0.01)
+
+
+def softmax(x, derivative=False):
+    if not derivative:
+        return np.exp(x) / sum(np.exp(x))
+    else:
+        raise NotImplementedError()
