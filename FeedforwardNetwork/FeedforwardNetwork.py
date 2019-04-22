@@ -8,18 +8,18 @@ class FeedforwardNetwork:
 
     def __init__(self, features_num, classes_num, hidden_layer_sizes, learning_rate=0.5):
         # weights for first layer
-        self.layer_weights = [np.random.rand(hidden_layer_sizes[0], features_num)]
+        self.layer_weights = [np.random.rand(hidden_layer_sizes[0], features_num) * 0.01]
         # weights for further layers
         for i in range(1, len(hidden_layer_sizes)):
-            self.layer_weights.append(np.random.rand(hidden_layer_sizes[i], hidden_layer_sizes[i - 1]))
+            self.layer_weights.append(np.random.rand(hidden_layer_sizes[i], hidden_layer_sizes[i - 1]) * 0.01)
         # weights for last layer
-        self.layer_weights.append(np.random.rand(classes_num, hidden_layer_sizes[-1]))
+        self.layer_weights.append(np.random.rand(classes_num, hidden_layer_sizes[-1]) * 0.01)
         # biases for all layers
         self.layer_biases = []
         for layer_size in hidden_layer_sizes:
-            self.layer_biases.append(np.random.rand(layer_size, 1))
+            self.layer_biases.append(np.zeros((layer_size, 1)))
         # biases for last layer
-        self.layer_biases.append(np.random.rand(classes_num, 1))
+        self.layer_biases.append(np.zeros((classes_num, 1)))
         # hiperparameters
         self.features_num = features_num
         self.learning_rate = learning_rate
@@ -46,7 +46,8 @@ class FeedforwardNetwork:
         d_biases = [np.sum(d_net_inputs[-1], axis=1, keepdims=True) / m]
         d_weights = [np.dot(d_net_inputs[-1], activations[-2].T) / m]
         for i in range(1, len(self.layer_weights)):
-            d_net_inputs.insert(0, self.layer_weights[-i].T.dot(d_net_inputs[-i]) * af.sigmoid_p(net_inputs[-i - 1]))
+            d_net_inputs.insert(0, self.layer_weights[-i].T.dot(d_net_inputs[-i]) * af.sigmoid(net_inputs[-i - 1],
+                                                                                               derriv=True))
             d_weights.insert(0, np.dot(d_net_inputs[0], activations[-i - 2].T) / m)
             d_biases.insert(0, np.sum(d_net_inputs[0], axis=1, keepdims=True) / m)
         for i in range(0, len(self.layer_weights)):

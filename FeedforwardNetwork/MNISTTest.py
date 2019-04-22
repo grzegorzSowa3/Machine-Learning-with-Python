@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 from FeedforwardNetwork import FeedforwardNetwork
 
-EPOCHS_NUM = 10
+EPOCHS_NUM = 100
 LEARNING_RATE = 0.01
 BATCH_SIZE = 100
 SHAPE = [300]
@@ -22,8 +22,8 @@ OUTPUT_DICT = {
 
 print("Preparing train data...")
 train_samples, train_labels = loadlocal_mnist(
-    images_path='D:/Tasks/PYTHON/train-images.idx3-ubyte',
-    labels_path='D:/Tasks/PYTHON/train-labels.idx1-ubyte'
+    images_path='D:/datasets/train-images.idx3-ubyte',
+    labels_path='D:/datasets/train-labels.idx1-ubyte'
 )
 train_samples = [(train_input / 255).tolist() for train_input in train_samples]
 train_labels = [OUTPUT_DICT[train_label] for train_label in train_labels]
@@ -33,8 +33,8 @@ print("Train data prepared.")
 
 print("Preparing test data...")
 test_samples, test_labels = loadlocal_mnist(
-    images_path='D:/Tasks/PYTHON/test-images.idx3-ubyte',
-    labels_path='D:/Tasks/PYTHON/test-labels.idx1-ubyte'
+    images_path='D:/datasets/test-images.idx3-ubyte',
+    labels_path='D:/datasets/test-labels.idx1-ubyte'
 )
 test_samples = [(test_input / 255).tolist() for test_input in test_samples]
 test_labels = [OUTPUT_DICT[test_label] for test_label in test_labels]
